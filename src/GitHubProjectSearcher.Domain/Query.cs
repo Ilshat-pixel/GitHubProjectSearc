@@ -7,7 +7,7 @@
     {
         public int QueryId { get; set; }
         public string SearchString { get; set; }
-        public ICollection<Card> Cards { get; set; }
+        public IList<Card> Cards { get; set; }
 
     }
 }
