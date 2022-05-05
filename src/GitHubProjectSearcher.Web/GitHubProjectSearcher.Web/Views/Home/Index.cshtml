@@ -1,0 +1,44 @@
+﻿@model GitHubProjectSearcher.Web.Models.SearchModelDto
+@{
+    ViewData["Title"] = "Project List";
+}
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Get, new { enctype = "multipart/form-data" }))
+{
+    <div class="main-search-input-wrap">
+
+        <div class="main-search-input fl-wrap">
+            <div class="main-search-input-item">
+                <input type="text" value="" placeholder="Search Products...">
+            </div>
+
+            <button class="main-search-button">Search</button>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.SeachString, "Наименование языка(.eng)", new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.SeachString, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.SeachString, "", new { @class = "text-danger  " })
+            </div>
+        </div>
+    </div>
+    <div class="form-group ">
+        <button class="btn btn-sm btn-primary rounded-0">Сохранить</button>
+    </div>
+
+
+}
+<div>
+    @if (Model.Cards != null)
+    {
+        <h3 class="text-center text-uppercase">Список проектов</h3>
+        @foreach (var card in @Model.Cards.Cards)
+        {
+            <p>@card.ProjectLink</p>
+        }
+    }
+</div>

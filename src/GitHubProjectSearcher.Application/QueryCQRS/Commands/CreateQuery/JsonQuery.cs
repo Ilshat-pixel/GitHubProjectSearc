@@ -2,9 +2,9 @@
 
 namespace GitHubProjectSearcher.Application.QueryCQRS.Commands.CreateQuery
 {
-    public class JsonQuery
-    {
-        [JsonPropertyName("items")]
-        public IList<JsonCard> Cards { get; set; }
-    }
+    //public class JsonQuery
+    //{
+    //    [JsonPropertyName("items")]
+    //    public IList<JsonCard> Cards { get; set; }
+    //}
 }

@@ -4,7 +4,7 @@ using GitHubProjectSearcher.Domain;
 
 namespace GitHubProjectSearcher.Application.QueryCQRS.Queries.GetQueryDetails
 {
-    public class OwnerVm:IMapWith<Owner>
+    public class OwnerVm : IMapWith<Owner>
     {
         public int OwnerId { get; set; }
         public string Login { get; set; }

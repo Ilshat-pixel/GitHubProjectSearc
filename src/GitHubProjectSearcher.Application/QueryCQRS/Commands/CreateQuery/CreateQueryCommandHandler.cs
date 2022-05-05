@@ -4,6 +4,7 @@ using GitHubProjectSearcher.Application.QueryCQRS.Queries.GetQueryDetails;
 using GitHubProjectSearcher.Domain;
 using MediatR;
 using Newtonsoft.Json;
+using QuickType;
 
 namespace GitHubProjectSearcher.Application.QueryCQRS.Commands.CreateQuery
 {
@@ -24,7 +25,10 @@ namespace GitHubProjectSearcher.Application.QueryCQRS.Commands.CreateQuery
         //TODO: вынести вызов апи в отдельный метод
         public async Task<CardListVm> Handle(CreateQueryCommand request, CancellationToken cancellationToken)
         {
-            var result = await _httpClient.GetAsync($"https://api.github.com/search/repositories?q={request.SearchString}");
+            var uri = String.Concat("https://api.github.com/search/repositories?q=", request.SearchString);
+            _httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+            _httpClient.DefaultRequestHeaders.UserAgent.TryParseAdd("request");//Set the User Agent to "request"
+            var result = await _httpClient.GetAsync(uri, HttpCompletionOption.ResponseHeadersRead);
             result.EnsureSuccessStatusCode(); // throws if not 200-299
             var aaa = new JsonQuery();
             if (result.Content is object && result.Content.Headers.ContentType.MediaType == "application/json")
@@ -49,15 +53,15 @@ namespace GitHubProjectSearcher.Application.QueryCQRS.Commands.CreateQuery
             {
                 Console.WriteLine("HTTP Response was invalid and cannot be deserialised.");
             }
-            var card = _mapper.Map<IList<Card>>(aaa.Cards);
+            var card = _mapper.Map<IList<Card>>(aaa.Items);
             var query = new Query
             {
                 SearchString = request.SearchString,
                 Cards = card,
-    
+
             };
             _dbContext.Queries.Add(query);
-            _dbContext.SaveChangesAsync(cancellationToken);
+            await _dbContext.SaveChangesAsync(cancellationToken);
             return new CardListVm { Cards = _mapper.Map<IList<CardVm>>(query.Cards) };
         }
 

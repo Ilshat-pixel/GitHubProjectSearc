@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using GitHubProjectSearcher.Application.Interfaces;
 using GitHubProjectSearcher.Application.QueryCQRS.Commands.CreateQuery;
-using GitHubProjectSearcher.Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 

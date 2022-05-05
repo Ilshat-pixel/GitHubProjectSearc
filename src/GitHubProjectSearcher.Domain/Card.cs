@@ -11,5 +11,6 @@
         public int StargazersCount {get;set;}
         public int Watchers { get; set; }
         public string ProjectLink { get; set; }
+        public string Name { get; set; }
     }
 }
