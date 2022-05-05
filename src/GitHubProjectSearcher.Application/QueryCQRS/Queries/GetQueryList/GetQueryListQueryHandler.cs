@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Linq;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using GitHubProjectSearcher.Application.Interfaces;
 using MediatR;
@@ -20,6 +21,8 @@ namespace GitHubProjectSearcher.Application.QueryCQRS.Queries.GetQueryList
         public async Task<QueryListVm> Handle(GetQueryListQuery request, CancellationToken cancellationToken)
         {
             var querys =  _dbContext.Queries
+                .Skip(request.Page)
+                .Take(request.PageSize)
                 .AsEnumerable().ToList();
             var dtoList = _mapper.Map<IList<QueryLookupDto>>(querys);
             return new QueryListVm { Querys = dtoList };

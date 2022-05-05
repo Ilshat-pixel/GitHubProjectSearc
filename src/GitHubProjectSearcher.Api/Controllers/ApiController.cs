@@ -30,15 +30,29 @@ namespace GitHubProjectSearcher.Api.Controllers
             var cards = await Mediator.Send(query);
             return Ok(cards);
         }
+        /// <summary>
+        /// Return all finded querys
+        /// </summary>
+        /// <param name="page">Current page</param>
+        /// <param name="pageSize">Page Size</param>
+        /// <returns>QueryListVm</returns>
         [HttpGet("find")]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll( int page=1, int pageSize=5)
         {
-            var query = new GetQueryListQuery { };
+            var query = new GetQueryListQuery 
+            {
+            Page =page,
+            PageSize =pageSize
+            };
             var vm = await Mediator.Send(query);
             return Ok(vm);
 
         }
-
+        /// <summary>
+        /// Delete finded query
+        /// </summary>
+        /// <param name="Id">query id</param>
+        /// <returns>NoContent</returns>
         [HttpDelete("find")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Delete(int Id)
