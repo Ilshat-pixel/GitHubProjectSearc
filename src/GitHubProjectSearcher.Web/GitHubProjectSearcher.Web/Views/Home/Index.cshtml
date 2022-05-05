@@ -15,39 +15,43 @@
                 </div>
             </div>
         </div>
-    </div>
-    @if (Model.Cards != null)
-    {
-        <h3 class="text-center text-uppercase">Список проектов</h3>
-        <div class="row">
-            @foreach (var card in @Model.Cards.Cards)
-            {
-                <div class="col-md-4">
-                    <div class="card p-3 mb-2">
-                        <div class="d-flex justify-content-between">
-                            <div class="d-flex flex-row align-items-center">
-                                <div class="icon"> <i class="bx bxl-reddit"></i> </div>
-                                <div class="ms-2 c-details">
-                                    <h6 class="mb-0">@card.Owner.Login</h6>
+        @if (Model.Cards != null)
+        {
+            <h3 class="text-center text-uppercase">Список проектов</h3>
+          
+        }
+        @if (Model.Cards != null)
+        {
+            <h3 class="text-center text-uppercase">Список проектов</h3>
+            <div class="row">
+                @foreach (var card in @Model.Cards.Cards)
+                {
+                    <div class="col-md-4">
+                        <div class="card p-3 mb-2">
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex flex-row align-items-center">
+                                    <div class="icon"> <i class="bx bxl-reddit"></i> </div>
+                                    <div class="ms-2 c-details">
+                                        <h6 class="mb-0">@card.Owner.Login</h6>
+                                    </div>
                                 </div>
                             </div>
-
-                        </div>
-                        <div class="mt-5">
-                            <h3 class="heading">@card.Name</h3>
                             <div class="mt-5">
-                                <div class="mt-3"> <span class="text1"> Количество звезд<span class="text1">@card.StargazersCount</span></span> </div>
-                                <div class="mt-3"> <span class="text1">Количество просмотров <span class="text1">@card.Watchers</span></span> </div>
+                                <h3 class="heading">@card.Name</h3>
+                                <div class="mt-5">
+                                    <div class="mt-3"> <span class="text1"> Количество звезд<span class="text1">@card.StargazersCount</span></span> </div>
+                                    <div class="mt-3"> <span class="text1">Количество просмотров <span class="text1">@card.Watchers</span></span> </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-            }
+                }
 
-        </div>
+            </div>
+        }
+    </div>
 
-    }
 }
 
 
