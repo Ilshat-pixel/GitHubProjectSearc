@@ -1,4 +1,4 @@
-# GitHubProjectSearc
+# GitHubProjectSearcher
 ### Перед запуском
 1. Сначала накатите миграции
 2. Потом запускайте)
