@@ -2,6 +2,7 @@
 using GitHubProjectSearcher.Application.QueryCQRS.Commands.DeleteQuery;
 using GitHubProjectSearcher.Application.QueryCQRS.Queries.GetQueryDetails;
 using GitHubProjectSearcher.Application.QueryCQRS.Queries.GetQueryList;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +11,7 @@ namespace GitHubProjectSearcher.Api.Controllers
 
     [Produces("application/json")]
     [Route("api")]
+    [Authorize]
     public class ApiController : BaseController
     {
         /// <summary>

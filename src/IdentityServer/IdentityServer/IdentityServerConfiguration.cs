@@ -1,4 +1,5 @@
-﻿using IdentityServer4;
+﻿using IdentityModel;
+using IdentityServer4;
 using IdentityServer4.Models;
 
 namespace IdentityServer
@@ -8,6 +9,19 @@ namespace IdentityServer
         public static IEnumerable<Client> GetClients(IConfiguration configuration) =>
        new List<Client>
        {
+             new Client
+            {
+                ClientId = "client_id_search_service",
+                ClientSecrets = { new Secret("client_secret_search_service".ToSha256()) },
+                AllowedGrantTypes =  GrantTypes.ResourceOwnerPassword,
+                AllowedCorsOrigins = {"https://localhost:44305"},
+                AllowedScopes =
+                {
+                    "SearchAPI",
+                    IdentityServerConstants.StandardScopes.OpenId,
+                    IdentityServerConstants.StandardScopes.Profile
+                }
+            },
             new Client
             {
                 ClientId = "js",

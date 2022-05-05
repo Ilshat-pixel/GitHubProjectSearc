@@ -1,4 +1,5 @@
 using System.Reflection;
+using GitHubProjectSearcher.Api.Extensions;
 using GitHubProjectSearcher.Api.Middleware;
 using GitHubProjectSearcher.Application;
 using GitHubProjectSearcher.Application.Common.Mappings;
@@ -30,13 +31,12 @@ namespace GitHubProjectSearcher.Api
                 config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
                 config.AddProfile(new AssemblyMappingProfile(typeof(IDbContext).Assembly));
             });
+            services.AddAuthServices();
             services.AddApplication();
             services.AddPersistence(Configuration);
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "GitHubProjectSearcher.Api", Version = "v1" });
-            });
+            services.AddSwaggerDocumentation("GitHubProjectSearcher.Api", "v1", "https://localhost:7260/connect/token");
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,14 +45,15 @@ namespace GitHubProjectSearcher.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GitHubProjectSearcher.Api v1"));
+                app.UseSwaggerDocumentation("GitHubProjectSearcher Documentation", "GitHubProjectSearcher.Api v1", "/swagger/v1/swagger.json", "client_id_search_service", "client_secret_search_service");
+
             }
             app.UseCustomExceptionHandler();
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

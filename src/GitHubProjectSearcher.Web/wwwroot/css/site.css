@@ -81,7 +81,7 @@ body {
 }
 
 .height {
-    height: 100vh;
+    height: 100%;
 }
 
 
@@ -121,8 +121,8 @@ body {
 }
 
 .card {
-    border: none;
-    border-radius: 10px
+    margin-top: 5px;
+    border-radius: 10px;
 }
 
 .c-details span {
