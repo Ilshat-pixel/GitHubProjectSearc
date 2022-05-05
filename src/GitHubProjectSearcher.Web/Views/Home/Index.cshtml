@@ -1,8 +1,48 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model GitHubProjectSearcher.Web.Models.SearchModelDto
+@{
+    ViewData["Title"] = "Project List";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@using (Html.BeginForm("Index", "Home", FormMethod.Get, new { enctype = "multipart/form-data" }))
+{
+    <div class="container">
+        <div class="row height d-flex justify-content-center align-items-center-top">
+            <div class="col-md-8">
+                <div class="search">
+                    <i class="fa fa-search"></i>
+                    <input type="text" asp-for=SeachString class="form-control" placeholder="Write a project Name">
+                    <button class="btn btn-primary">Search</button>
+                </div>
+
+
+            </div>
+            @if (Model.Cards != null)
+            {
+                <h3 class="text-center text-uppercase">Список проектов</h3>
+                <div class="row">
+                    @foreach (var card in @Model.Cards.Cards)
+                    {
+                        <a href="@card.ProjectLink" class="col-md-4">
+                            <div>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@card.Name</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">@card.Owner.Login</h6>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">Количество звезд: @card.StargazersCount</li>
+                                            <li class="list-group-item">Количество просмотров: @card.Watchers</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+
+
+                    }
+
+                </div>
+            }
+        </div>
+    </div>
+
+}
