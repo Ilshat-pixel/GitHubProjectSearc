@@ -38,17 +38,8 @@ namespace GitHubProjectSearcher.Api.Controllers
             return Ok(vm);
 
         }
-        /// <summary>
-        /// Delete query info`s by Id
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        /// DELETE /find/5
-        /// </remarks>
-        /// <param name="Id"></param>
-        /// <returns>Returns NoContent</returns>
-        /// <response code="204">Success</response>
-        [HttpDelete("find/{id}")]
+
+        [HttpDelete("find")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Delete(int Id)
         {

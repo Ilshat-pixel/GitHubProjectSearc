@@ -15,10 +15,7 @@ namespace GitHubProjectSearcher.Web.Controllers
         {
             _logger = logger;
         }
-        public IActionResult Hello()
-        {
-            return View();
-        }
+
         public async Task<IActionResult> Index(SearchModelDto searchModelDto)
         {
             if (!string.IsNullOrEmpty(searchModelDto.SeachString))
